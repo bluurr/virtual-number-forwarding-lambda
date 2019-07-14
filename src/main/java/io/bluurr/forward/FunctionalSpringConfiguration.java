@@ -6,7 +6,6 @@ import io.bluurr.forward.function.EntryPoint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.messaging.Message;
 
 import java.util.function.Function;
 
@@ -18,7 +17,7 @@ public class FunctionalSpringConfiguration  {
   }
 
   @Bean("lambdaFunction")
-  public Function<Message<APIGatewayProxyRequestEvent>, Message<APIGatewayProxyResponseEvent>> apply() {
+  public Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> apply() {
     return new EntryPoint()::process;
   }
 }

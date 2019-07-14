@@ -7,4 +7,4 @@ import org.springframework.cloud.function.adapter.aws.SpringBootRequestHandler;
 /**
  * Spring binding class for handling AWS API Gateway Inbound and Outbound responses.
  */
-public class AwsApiGatewayHander extends SpringBootRequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {}
+public class AwsApiGatewayHandler extends SpringBootRequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {}
