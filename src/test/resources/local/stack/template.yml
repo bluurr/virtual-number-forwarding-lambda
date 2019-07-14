@@ -1,0 +1,8 @@
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  LambdaFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: 'io.bluurr.forward.AwsApiGatewayHandler'
+      CodeUri: ../../../@project.build.finalName@.jar # Move up the file path to the lambda jar location.
+      Runtime: java8
