@@ -21,7 +21,7 @@ public class FunctionalSpringConfiguration implements ApplicationContextInitiali
 
   @Override
   public void initialize(GenericApplicationContext context) {
-    context.registerBean("demo", FunctionRegistration.class,
+    context.registerBean("function", FunctionRegistration.class,
         () -> new FunctionRegistration<>(createEntryFunction(new VirtualNumberFunction()))
             .type(FunctionType.from(APIGatewayProxyRequestEvent.class).to(APIGatewayProxyResponseEvent.class)));
   }

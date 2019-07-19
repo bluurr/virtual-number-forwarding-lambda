@@ -1,1 +1,6 @@
-
+spring:
+  cloud:
+    function:
+      web:
+        export:
+          enabled: false

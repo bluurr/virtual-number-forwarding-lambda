@@ -6,15 +6,12 @@ import com.nexmo.client.incoming.CallEvent;
 import com.nexmo.client.voice.VoiceName;
 import com.nexmo.client.voice.ncco.Ncco;
 import com.nexmo.client.voice.ncco.TalkAction;
-import com.nexmo.client.voice.servlet.NccoResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @AllArgsConstructor
-@Component
 public class VirtualNumberFunction {
 
   public APIGatewayProxyResponseEvent handle(final APIGatewayProxyRequestEvent event) {
