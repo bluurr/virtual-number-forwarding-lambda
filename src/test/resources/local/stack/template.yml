@@ -6,3 +6,10 @@ Resources:
       Handler: 'io.bluurr.forward.AwsApiGatewayHandler'
       CodeUri: ../../../@project.build.finalName@.jar # Move up the file path to the lambda jar location.
       Runtime: java8
+      Timeout: 30
+      Events:
+          Api:
+            Type: Api
+            Properties:
+              Path: /function
+              Method: post
