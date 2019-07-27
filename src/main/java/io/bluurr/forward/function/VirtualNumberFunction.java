@@ -15,39 +15,49 @@ import org.jetbrains.annotations.Nullable;
 public class VirtualNumberFunction {
 
   public APIGatewayProxyResponseEvent handle(final APIGatewayProxyRequestEvent event) {
-    CallEvent callEvent = toStatusEvent(event.getBody());
-    Ncco response = handleCallStage(callEvent);
-    return replyForSuccess(response);
+    try {
+      CallEvent callEvent = CallEvent.fromJson(event.getBody());
+      Ncco response = getCallPlanForEvent(callEvent);
+      return createGatewayReply(response);
+    } catch(final Exception err) {
+      log.error("Error with event: {}", event);
+      throw new IllegalStateException("Unable to handle call event request", err);
+    }
   }
 
-  private APIGatewayProxyResponseEvent replyForSuccess(final @Nullable Ncco callActions) {
-    APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
-    String body = callActions != null ? callActions.toJson() : "";
-    response.setBody(body);
-    response.setStatusCode(200);
+  private APIGatewayProxyResponseEvent createGatewayReply(final @Nullable Ncco callActions) {
+    APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
+        .withStatusCode(200);
+
+    if(callActions != null) {
+      response.setBody(callActions.toJson());
+    }
+
+    log.info("responded with: {}", response);
     return response;
   }
 
   @Nullable
-  private Ncco handleCallStage(final CallEvent event) {
-    log.info("EVENT:", event);
-    switch (event.getStatus()) {
-      case ANSWERED:
-        return createEventForStarted(event);
-
-      default:
-        log.warn("Skipping event of type: {}", event.getStatus());
-        return null;
+  private Ncco getCallPlanForEvent(final CallEvent event) {
+    if (isAnsweredEvent(event)) {
+      return getAnsweredCallPlan();
     }
+
+    log.warn("Call event information: {}", event);
+    return null;
   }
 
-  private Ncco createEventForStarted(final CallEvent event) {
-    TalkAction talk =
-        new TalkAction.Builder("Hello, Thank you for calling.").voiceName(VoiceName.BRIAN).build();
+  private Ncco getAnsweredCallPlan() {
+    //TODO: make this speech load from a configuration file.
+    TalkAction talk = new TalkAction.Builder("<speak>Hello, Thank you for calling. I'm currently not available to take this call. " +
+        "Please drop me an email at <sub alias=\"chris.bath@blur.com\">chris.bath@bluurr.com</sub>. That is Chris dot Bath at <break strength='weak' />B <break strength='weak' />L <break strength='weak' />U " +
+        "<break strength='weak' />U <break strength='weak'/>R <break strength='weak' />R dot com. Thank you.</speak>")
+        .voiceName(VoiceName.BRIAN)
+        .build();
     return new Ncco(talk);
   }
 
-  private CallEvent toStatusEvent(final String jsonValue) {
-    return CallEvent.fromJson(jsonValue);
+  private boolean isAnsweredEvent(final CallEvent event) {
+    return event != null && event.getStatus() == null && event.getConversationUuid() != null;
   }
 }
