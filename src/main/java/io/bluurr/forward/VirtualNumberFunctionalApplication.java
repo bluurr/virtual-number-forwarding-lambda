@@ -13,10 +13,10 @@ import org.springframework.context.support.GenericApplicationContext;
 import java.util.function.Function;
 
 @SpringBootConfiguration
-public class FunctionalSpringConfiguration implements ApplicationContextInitializer<GenericApplicationContext> {
+public class VirtualNumberFunctionalApplication implements ApplicationContextInitializer<GenericApplicationContext> {
 
   public static void main(final String[] args) {
-    FunctionalSpringApplication.run(FunctionalSpringConfiguration.class, args);
+    FunctionalSpringApplication.run(VirtualNumberFunctionalApplication.class, args);
   }
 
   @Override

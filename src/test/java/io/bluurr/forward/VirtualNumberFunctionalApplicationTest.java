@@ -6,11 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-public class VirtualNumberForwardingLambdaApplicationTest {
+@SpringBootTest(classes = VirtualNumberFunctionalApplication.class)
+public class VirtualNumberFunctionalApplicationTest {
 
   @Test
   public void contextLoads() {
   }
-
 }
