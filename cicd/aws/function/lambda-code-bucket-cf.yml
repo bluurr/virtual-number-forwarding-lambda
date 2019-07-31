@@ -1,0 +1,12 @@
+Resources:
+  LambdaBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: lambda-code-virtual-number
+
+Outputs:
+  LambdaS3Bucket:
+    Description: Lambda S3 bucket for storing the code which is executed on the Lambda platform.
+    Value: !Ref LambdaBucket
+    Export:
+      Name: 'LambdaS3Bucket'

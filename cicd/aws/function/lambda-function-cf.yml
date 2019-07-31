@@ -1,0 +1,39 @@
+Transform: 'AWS::Serverless-2016-10-31'
+Globals:
+  Api:
+    OpenApiVersion: '3.0.1' ## prevents default stage getting created. (https://github.com/awslabs/serverless-application-model/issues/191)
+Parameters:
+  LambdaJarName:
+    Type: 'String'
+  GatewayStage:
+    Type: 'String'
+    Default: 'testing'
+Resources:
+  LambdaApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref 'GatewayStage'
+      EndpointConfiguration: REGIONAL
+  LambdaFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: 'io.bluurr.forward.AwsApiGatewayHandler'
+      CodeUri:
+        Key: !Ref 'LambdaJarName'
+        Bucket: !ImportValue 'LambdaS3Bucket'
+      Runtime: java8
+      MemorySize: 1024
+      Timeout: 30
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LambdaApiGateway
+            Path: /call-event
+            Method: post
+Outputs:
+  LambdaApiGateway:
+    Description: The Api gateway for calling the lambda function.
+    Value: !Ref LambdaApiGateway
+    Export:
+      Name: 'LambdaApiGateway'

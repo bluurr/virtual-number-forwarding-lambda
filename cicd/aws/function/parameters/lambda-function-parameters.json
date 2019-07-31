@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "LambdaJarName",
+    "ParameterValue": "virtual-number-forwarding-lambda-0.0.1-SNAPSHOT.jar"
+  },
+  {
+    "ParameterKey": "GatewayStage",
+    "ParameterValue": "testing"
+  }
+]
