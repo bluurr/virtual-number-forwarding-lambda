@@ -1,0 +1,18 @@
+Parameters:
+  PrimaryDomainName:
+    Type: 'String'
+  SubDomains:
+    Type: 'CommaDelimitedList'
+Resources:
+  DomainCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref 'PrimaryDomainName'
+      SubjectAlternativeNames: !Ref 'SubDomains'
+      ValidationMethod: 'DNS'
+Outputs:
+  LambdaApiGateway:
+    Description: The ACM domain certificate provided by Amazon.
+    Value: !Ref DomainCertificate
+    Export:
+      Name: 'DomainCertificate'

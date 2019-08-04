@@ -1,0 +1,44 @@
+Parameters:
+  GatewayCustomDomainName:
+    Type: 'String'
+    Description: 'The custom domain name which will point to this api gateway.'
+  Route53HostedZoneName:
+    Type: 'String'
+    Description: 'The Route53 hosted zone which the custom domain will use for routing (this is normally the parent domain name)'
+    ## For more information on hosted zones see https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html
+  GatewayStage:
+    Type: 'String'
+    Description: 'The API gateway stage to set as the default when accessed via the custom domain.'
+    Default: 'testing'
+Resources:
+  ## Set-up a custom domain name for the AWS gateway (https://eu-west-1.console.aws.amazon.com/apigateway/home?region=eu-west-1#/custom-domain-names)
+  ApiGatewayDomain:
+    Type: AWS::ApiGateway::DomainName
+    Properties:
+      RegionalCertificateArn: !ImportValue 'DomainCertificate'
+      DomainName: !Ref 'GatewayCustomDomainName'
+      EndpointConfiguration:
+        Types:
+          - 'REGIONAL'
+
+  ## Set-up the stage mapping to the API gateway domain name.
+  ApiGatewayBasePathMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      BasePath: ""
+      DomainName: !Ref 'GatewayCustomDomainName'
+      RestApiId: !ImportValue "LambdaApiGateway"
+      Stage: !Ref 'GatewayStage'
+    DependsOn: "ApiGatewayDomain"
+
+  ## Attach the Route53 record for the API gateway
+  ApiGatewayCustomDomainRoute53RouteSet:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Ref 'GatewayCustomDomainName'
+      Type: 'A'
+      HostedZoneName: !Ref "Route53HostedZoneName"
+      AliasTarget:
+        DNSName: !GetAtt ApiGatewayDomain.RegionalDomainName
+        HostedZoneId: !GetAtt ApiGatewayDomain.RegionalHostedZoneId
+    DependsOn: "ApiGatewayDomain"
