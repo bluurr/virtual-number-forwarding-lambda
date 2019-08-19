@@ -19,7 +19,7 @@ steps:
     displayName: 'Copy AWS Infra to staging directory.'
     inputs:
       sourceFolder: '$(Build.SourcesDirectory)/cicd/aws'
-      contents: '*.jar'
+      contents: '**'
       targetFolder: '$(Build.ArtifactStagingDirectory)/aws-infra/'
 
   - publish: '$(Build.ArtifactStagingDirectory)/target/'
