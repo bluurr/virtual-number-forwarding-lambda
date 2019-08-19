@@ -21,7 +21,7 @@ public class VirtualNumberFunction {
       Ncco response = getCallPlanForEvent(callEvent);
       return createGatewayReply(response);
     } catch(final Exception err) {
-      log.error("Error with event: {}", event);
+      log.error("Error with event: {}", event); // capture information that is lost in the stack trace.
       throw new IllegalStateException("Unable to handle call event request", err);
     }
   }

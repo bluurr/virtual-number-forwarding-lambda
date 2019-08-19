@@ -22,4 +22,10 @@ class VirtualNumberApplicationIT {
   void shouldValidateContextLoads() {
     assertThat(context, notNullValue());
   }
+
+  @Test
+  void shouldValidateFunctionBeanLoaded() {
+    assertThat(context, notNullValue());
+    assertThat(context.getBean("function"), notNullValue());
+  }
 }
