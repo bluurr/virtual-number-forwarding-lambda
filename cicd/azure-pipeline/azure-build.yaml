@@ -1,0 +1,27 @@
+steps:
+  - task: Maven@3
+    displayName: 'Verify build (Maven)'
+    inputs:
+      goals: verify
+      jdkVersionOption: '1.8'
+      mavenAuthenticateFeed: true
+
+  - task: CopyFiles@2
+    displayName: 'Copy jar to staging directory.'
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)/target'
+      contents: '*.jar'
+      targetFolder: '$(Build.ArtifactStagingDirectory)/target/'
+
+  - task: CopyFiles@2
+    displayName: 'Copy AWS Infra to staging directory.'
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)/cicd/aws'
+      contents: '*.jar'
+      targetFolder: '$(Build.ArtifactStagingDirectory)/aws-infra/'
+
+  - publish: '$(Build.ArtifactStagingDirectory)/target/'
+    artifact: build
+
+  - publish: '$(Build.ArtifactStagingDirectory)/aws-infra/'
+    artifact: aws-infra
