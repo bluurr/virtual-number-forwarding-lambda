@@ -4,3 +4,7 @@ spring:
       web:
         export:
           enabled: false
+default:
+  voice:
+    response:
+      text: "<speak>Hello, Thank you for calling. I'm currently not available to take this call.</speak>"
