@@ -15,6 +15,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>2.1.1.RELEASE</spring-cloud.version>
+        <junit.jupiter.version>5.5.1</junit.jupiter.version>
         <start-class>io.bluurr.forward.VirtualNumberFunctionalApplication</start-class>
     </properties>
 
@@ -81,9 +82,26 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- better junit 5 should be available in Spring 2.2.0+
+        https://github.com/spring-projects/spring-boot/issues/14736-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <!-- matches version from Spring Boot test starter. -->
+            <version>2.23.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -137,6 +155,10 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
