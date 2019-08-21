@@ -5,7 +5,5 @@ stackName=virtual-number-lambda-function
 templateFile=lambda-function-cf.yml
 parameterFile=./parameters/cf-processed-lambda-function-parameters.json
 
-echo $PATH
-
 aws-cf-upsert.sh ${stackName} ${templateFile} --parameters file://${parameterFile} \
     --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND
