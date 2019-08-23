@@ -5,6 +5,6 @@ compgen -v | while read -r PARAM_NAME; do
     ## Filter to variables which are support.
     if [[ ${PARAM_NAME} == 'PARAMETER_'* ]]
     then
-        echo ${PARAM_NAME}
+        echo "${PARAM_NAME}"
     fi
 done

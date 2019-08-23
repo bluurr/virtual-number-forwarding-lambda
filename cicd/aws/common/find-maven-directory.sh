@@ -11,7 +11,7 @@ do
         searchDepth=0 ##Root folder found.
         found=true
     else
-      searchDepth=$(($searchDepth - 1)) ## Moved the search to the next index
+      searchDepth=$(("${searchDepth}" - 1)) ## Moved the search to the next index
       mavenDir=${mavenDir}.'/../'
     fi
 done
