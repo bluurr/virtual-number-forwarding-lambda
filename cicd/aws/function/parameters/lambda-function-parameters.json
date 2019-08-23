@@ -1,10 +1,10 @@
 [
   {
     "ParameterKey": "LambdaJarName",
-    "ParameterValue": "${lambdaJarName}"
+    "ParameterValue": "${LAMBDA_JAR_NAME}"
   },
   {
     "ParameterKey": "GatewayStage",
-    "ParameterValue": "testing"
+    "ParameterValue": "${PARAMETER_ENVIRONMENT}"
   }
 ]
