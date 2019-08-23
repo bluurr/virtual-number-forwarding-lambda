@@ -5,8 +5,7 @@ parameterFile=lambda-code-bucket-parameters.json ## main parameter file to use.
 
 echo "Processing parameter file: ${parameterFile}."
 
-parameters=('PARAMETER_JAR_NAME' "${buildArtifact}")
-processedParameterFile=$(process-cloud-template-parameters.sh ${parameterFile} "${parameters[@]}")
+processedParameterFile=$(process-cloud-template-parameters.sh ${parameterFile})
 
 ## Print to console and save to parameter file.
 echo "${processedParameterFile}"

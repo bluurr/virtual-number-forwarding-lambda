@@ -15,8 +15,6 @@ done
 parameterSize=${#parameters[@]}
 output=""
 
-
-
 ## Read our file and process each line for matching parameters
 while read -r line || [[ -n ${line} ]] ##Fully read the file.
 do
@@ -30,7 +28,7 @@ do
         parameterName=${parameters[${parameterOffset}]}
         parameterValue=${parameters[${parameterOffset} + 1]}
         ##Replace parameter in the format ${NAME} with value.
-        processedOutput=${processedOutput//\${"${parameterName}"\}/"${parameterValue}"}
+        processedOutput=${processedOutput//\$\{"${parameterName}"\}/"${parameterValue}"}
         parameterOffset=$((parameterOffset + 2))
     done
 
