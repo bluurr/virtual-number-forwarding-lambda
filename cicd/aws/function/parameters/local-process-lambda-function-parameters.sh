@@ -12,7 +12,7 @@ echo ${buildArtifact}
 
 echo "Build artifact found ${buildArtifact}."
 
-parameters=('LAMBDA_JAR_NAME' ${buildArtifact} 'PARAMETER_ENVIRONMENT' "testing")
+parameters=('LAMBDA_JAR_NAME' ${buildArtifact} 'PARAMETER_ENVIRONMENT' "test")
 processedParameterFile=$(process-cloud-template-parameters.sh ${parameterFile} ${parameters[@]})
 echo ${processedParameterFile} > "cf-processed-"${parameterFile}
 echo 'Parameter processing completed.'
