@@ -8,12 +8,14 @@ pipelineParameterNames=($(get-pipeline-parameters.sh))
 for parameterName in "${pipelineParameterNames[@]}"
 do
     parameterValue=${!parameterName}
-    parameters+=(${parameterName} parameterValue)
+    parameters+=(${parameterName} ${parameterValue})
 done
 
 ## Work out the amount of parameters to apply
 parameterSize=${#parameters[@]}
 output=""
+
+
 
 ## Read our file and process each line for matching parameters
 while read line || [[ -n ${line} ]] ##Fully read the file.

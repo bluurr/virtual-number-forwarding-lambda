@@ -1,7 +1,7 @@
 [
   {
     "ParameterKey": "LambdaJarName",
-    "ParameterValue": "${LAMBDA_JAR_NAME}"
+    "ParameterValue": "${PARAMETER_JAR_NAME}"
   },
   {
     "ParameterKey": "GatewayStage",
