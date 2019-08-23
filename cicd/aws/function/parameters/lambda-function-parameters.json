@@ -6,5 +6,9 @@
   {
     "ParameterKey": "GatewayStage",
     "ParameterValue": "${PARAMETER_ENVIRONMENT}"
+  },
+  {
+    "ParameterKey": "Environment",
+    "ParameterValue": "${PARAMETER_ENVIRONMENT}"
   }
 ]

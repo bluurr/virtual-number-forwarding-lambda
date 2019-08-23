@@ -21,7 +21,6 @@ Resources:
         Types:
           - 'REGIONAL'
 
-
   ## Set-up the stage mapping to the API gateway domain name.
   ApiGatewayBasePathMapping:
     Type: AWS::ApiGateway::BasePathMapping

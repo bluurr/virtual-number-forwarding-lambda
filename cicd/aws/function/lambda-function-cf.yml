@@ -5,9 +5,12 @@ Globals:
 Parameters:
   LambdaJarName:
     Type: 'String'
+  Environment:
+    Type: 'String'
+    Default: 'test'
   GatewayStage:
     Type: 'String'
-    Default: 'testing'
+    Default: 'test'
 Resources:
   LambdaApiGateway:
     Type: AWS::Serverless::Api
@@ -20,7 +23,8 @@ Resources:
       Handler: 'io.bluurr.forward.AwsApiGatewayHandler'
       CodeUri:
         Key: !Ref 'LambdaJarName'
-        Bucket: !ImportValue 'LambdaS3Bucket'
+        Bucket:
+          Fn::ImportValue: !Sub "lambda-s3-bucket-${Environment}"
       Runtime: java8
       MemorySize: 1024
       Timeout: 30
@@ -36,4 +40,4 @@ Outputs:
     Description: The Api gateway for calling the lambda function.
     Value: !Ref LambdaApiGateway
     Export:
-      Name: 'LambdaApiGateway'
+      Name: !Sub "lambda-api-gateway-${Environment}"

@@ -1,10 +1,10 @@
 [
   {
     "ParameterKey": "GatewayCustomDomainName",
-    "ParameterValue": "test-gateway.api.bluurr.io"
+    "ParameterValue": "${PARAMETER_API_GATEWAY_DOMAIN}"
   },
   {
     "ParameterKey": "Route53HostedZoneName",
-    "ParameterValue": "bluurr.io."
+    "ParameterValue": "${PARAMETER_HOSTED_ZONE}"
   }
 ]
