@@ -32,3 +32,4 @@ build/
 
 ### cloud formation processed parameter files. ###
 **/cf-processed-**
+**/**.cf-processed.**
