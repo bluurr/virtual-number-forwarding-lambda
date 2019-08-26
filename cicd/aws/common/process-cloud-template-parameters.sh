@@ -4,7 +4,7 @@ parameterFile=${args[0]}
 parameters=("${args[@]:1}") ## Skip first parameter as this is the parameter file.
 
 ## Extract environment/pipeline variables to apply to the parameter file.
-mapfile -t pipelineParameterNames < <(get-pipeline-parameters.sh)
+mapfile -t pipelineParameterNames < <(./get-pipeline-parameters.sh)
 
 for parameterName in "${pipelineParameterNames[@]}"
 do

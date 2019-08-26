@@ -6,7 +6,7 @@ parameters=("${args[@]:1}") ## Skip first parameter as this is the parameter fil
 echo "Processing parameter file ${parameterFile}."
 
 ## Run the processor
-processedFileData=$(process-cloud-template-parameters.sh "${parameterFile}" "${parameters[@]}")
+processedFileData=$(./process-cloud-template-parameters.sh "${parameterFile}" "${parameters[@]}")
 
 ## Debugging
 echo "${processedFileData}"
