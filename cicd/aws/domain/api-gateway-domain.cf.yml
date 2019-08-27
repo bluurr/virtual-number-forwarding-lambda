@@ -13,6 +13,9 @@ Parameters:
   Environment:
     Type: 'String'
     Default: 'test'
+  NamePrefix:
+    Type: 'String'
+    Default: 'virtual-number'
 Resources:
   ## Set-up a custom domain name for the AWS gateway (https://eu-west-1.console.aws.amazon.com/apigateway/home?region=eu-west-1#/custom-domain-names)
   ApiGatewayDomain:
@@ -31,7 +34,7 @@ Resources:
       BasePath: ""
       DomainName: !Ref 'GatewayCustomDomainName'
       RestApiId:
-        Fn::ImportValue: !Sub "lambda-api-gateway-${Environment}"
+        Fn::ImportValue: !Sub "${Environment}-${NamePrefix}-lambda-api-gateway"
       Stage: !Ref 'GatewayStage'
     DependsOn: "ApiGatewayDomain"
 

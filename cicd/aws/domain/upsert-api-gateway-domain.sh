@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 PATH='./../common/':$PATH ## Adds the common script folder to the path
 
-stackName="virtual-number-api-gateway-domain-${PARAMETER_ENVIRONMENT}"
+stackName="${PARAMETER_ENVIRONMENT}-virtual-number-api-gateway-domain"
 templateFile=api-gateway-domain.cf.yml
 parameterFile=./parameters/api-gateway-domain.parameters.cf-processed.json
 

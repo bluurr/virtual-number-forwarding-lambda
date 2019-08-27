@@ -2,14 +2,17 @@ Parameters:
   Environment:
     Type: 'String'
     Default: 'test'
+  NamePrefix:
+    Type: 'String'
+    Default: 'virtual-number'
 Resources:
   LambdaBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "lambda-code-virtual-number-${Environment}"
+      BucketName: !Sub "${Environment}-${NamePrefix}-lambda-s3-bucket"
 Outputs:
   LambdaS3Bucket:
     Description: Lambda S3 bucket for storing the code which is executed on the Lambda platform.
     Value: !Ref LambdaBucket
     Export:
-      Name: !Sub "lambda-s3-bucket-${Environment}"
+      Name: !Sub "${Environment}-${NamePrefix}-lambda-s3-bucket"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 PATH='./../common/':$PATH ## Adds the common script folder to the path
 
-stackName="virtual-number-lambda-bucket-${PARAMETER_ENVIRONMENT}"
+stackName="${PARAMETER_ENVIRONMENT}-virtual-number-lambda-bucket"
 templateFile=lambda-code-bucket-cf.yml
 parameterFile=./parameters/lambda-code-bucket.parameters.cf-processed.json
 

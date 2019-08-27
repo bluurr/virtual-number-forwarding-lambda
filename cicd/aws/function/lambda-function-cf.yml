@@ -3,6 +3,9 @@ Globals:
   Api:
     OpenApiVersion: '3.0.1' ## prevents default stage getting created. (https://github.com/awslabs/serverless-application-model/issues/191)
 Parameters:
+  NamePrefix:
+    Type: 'String'
+    Default: 'virtual-number'
   LambdaJarName:
     Type: 'String'
   Environment:
@@ -18,16 +21,19 @@ Resources:
   LambdaApiGateway:
     Type: AWS::Serverless::Api
     Properties:
+      Name: !Sub "${Environment}-${NamePrefix}-lambda-api-gateway"
       StageName: !Ref 'GatewayStage'
       EndpointConfiguration: REGIONAL
   LambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
+      FunctionName: !Sub "${Environment}-${NamePrefix}-lambda-function"
+      Description: "A lambda function which accepts incoming phone calls and builds a call-plan definition for the call to follow."
       Handler: 'io.bluurr.forward.AwsApiGatewayHandler'
       CodeUri:
         Key: !Ref 'LambdaJarName'
         Bucket:
-          Fn::ImportValue: !Sub "lambda-s3-bucket-${Environment}"
+          Fn::ImportValue: !Sub "${Environment}-${NamePrefix}-lambda-s3-bucket"
       Environment:
         Variables:
           default_voice_answer_text: !Ref 'DefaultVoiceAnswerText'
@@ -46,4 +52,4 @@ Outputs:
     Description: The Api gateway for calling the lambda function.
     Value: !Ref LambdaApiGateway
     Export:
-      Name: !Sub "lambda-api-gateway-${Environment}"
+      Name: !Sub "${Environment}-${NamePrefix}-lambda-api-gateway"
