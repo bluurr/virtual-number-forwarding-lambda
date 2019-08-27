@@ -1,10 +1,10 @@
 [
   {
     "ParameterKey": "PrimaryDomainName",
-    "ParameterValue": "bluurr.io"
+    "ParameterValue": "${PARAMETER_ROOT_DOMAIN}"
   },
   {
     "ParameterKey": "SubDomains",
-    "ParameterValue": "*.bluurr.io,*.api.bluurr.io,*.app.bluurr.io"
+    "ParameterValue": "${PARAMETER_SUB_DOMAINS}"
   }
 ]

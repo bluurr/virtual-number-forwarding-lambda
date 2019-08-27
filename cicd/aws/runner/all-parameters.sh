@@ -11,5 +11,8 @@ export PARAMETER_ENVIRONMENT=dev
 export PARAMETER_JAR_NAME=${buildArtifact}
 
 ## For use with domain set-up only
+export PARAMETER_ROOT_DOMAIN="bluurr.io"
+export PARAMETER_SUB_DOMAINS="*.bluurr.io,*.api.bluurr.io"
+
 export PARAMETER_API_GATEWAY_DOMAIN="dev-gateway.api.bluurr.io"
-export PARAMETER_ROUTE_53_HOSTED_ZONE="bluurr.io"
+export PARAMETER_ROUTE_53_HOSTED_ZONE="bluurr.io."

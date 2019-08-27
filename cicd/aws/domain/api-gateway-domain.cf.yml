@@ -9,7 +9,10 @@ Parameters:
   GatewayStage:
     Type: 'String'
     Description: 'The API gateway stage to set as the default when accessed via the custom domain.'
-    Default: 'testing'
+    Default: 'test'
+  Environment:
+    Type: 'String'
+    Default: 'test'
 Resources:
   ## Set-up a custom domain name for the AWS gateway (https://eu-west-1.console.aws.amazon.com/apigateway/home?region=eu-west-1#/custom-domain-names)
   ApiGatewayDomain:
@@ -27,7 +30,8 @@ Resources:
     Properties:
       BasePath: ""
       DomainName: !Ref 'GatewayCustomDomainName'
-      RestApiId: !ImportValue "LambdaApiGateway"
+      RestApiId:
+        Fn::ImportValue: !Sub "lambda-api-gateway-${Environment}"
       Stage: !Ref 'GatewayStage'
     DependsOn: "ApiGatewayDomain"
 
