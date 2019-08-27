@@ -5,6 +5,6 @@
   },
   {
     "ParameterKey": "Route53HostedZoneName",
-    "ParameterValue": "${PARAMETER_HOSTED_ZONE}"
+    "ParameterValue": "${PARAMETER_ROUTE_53_HOSTED_ZONE}"
   }
 ]

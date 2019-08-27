@@ -1,27 +1,24 @@
 #!/usr/bin/env bash
 PATH='./../common/':$PATH ## Adds the common script folder to the path
 
-## Use Maven to find the jar name and version.
-echo "Locating Maven build artifact"
+echo "Prepaing parameters"
 
-## Find the maven artifact containing the lambda code base
-mavenDir=$(find-maven-directory.sh)
-buildArtifact=$(find-maven-build-artifact-name.sh "${mavenDir}")
+## Pepare all the parameters.
+. ./all-parameters.sh ## Export all the required parameters
 
-echo "Prepaing cloud formation parameters"
+## Move to common folder to process parameters.
+cd "./../common/" || exit
 
-## Parameters
-export PARAMETER_ENVIRONMENT=dev
-export PARAMETER_JAR_NAME=${buildArtifact}
+## Debugging only, used for showing which values are going to be used within the pipeline
+echo "Using parameters:"
 
-##end of Parameters
+./get-pipeline-parameter-values.sh ##Prints parameter name and value.
 
 ##location of function parameters
 functionParameterFolder='./../function/parameters/'
 
-## Process the bucket parameters
-process-cloud-template-parameters-and-save.sh "${functionParameterFolder}lambda-code-bucket.parameters.json"
-process-cloud-template-parameters-and-save.sh "${functionParameterFolder}lambda-function.parameters.json"
+./process-cloud-template-parameters-and-save.sh "${functionParameterFolder}lambda-code-bucket.parameters.json"
+./process-cloud-template-parameters-and-save.sh "${functionParameterFolder}lambda-function.parameters.json"
 
 ## Create the lambda code bucket (this bucket holds the jar file)
 echo "Creating AWS S3 bucket for storing Lambda jar artifact."
