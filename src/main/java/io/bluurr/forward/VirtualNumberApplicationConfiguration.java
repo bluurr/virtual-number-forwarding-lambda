@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Configuration
 public class VirtualNumberApplicationConfiguration {
 
-  private static final String DEFAULT_VOICE_RESPONSE = "default.voice.response";
+  private static final String DEFAULT_VOICE_RESPONSE = "default.voice.answer";
 
   Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> functionEntryPoint(final ApplicationContext context) {
     VirtualNumberFunction function = new VirtualNumberFunction(callPlanProvider(context));

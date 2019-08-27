@@ -11,6 +11,9 @@ Parameters:
   GatewayStage:
     Type: 'String'
     Default: 'test'
+  DefaultVoiceAnswerText:
+    Type: 'String'
+    Description: 'The default voice text response which should be spoken when a call is received.'
 Resources:
   LambdaApiGateway:
     Type: AWS::Serverless::Api
@@ -25,6 +28,9 @@ Resources:
         Key: !Ref 'LambdaJarName'
         Bucket:
           Fn::ImportValue: !Sub "lambda-s3-bucket-${Environment}"
+      Environment:
+        Variables:
+          default_voice_answer_text: !Ref 'DefaultVoiceAnswerText'
       Runtime: java8
       MemorySize: 1024
       Timeout: 30

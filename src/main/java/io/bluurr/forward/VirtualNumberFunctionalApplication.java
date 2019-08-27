@@ -24,7 +24,4 @@ public class VirtualNumberFunctionalApplication implements ApplicationContextIni
             .type(FunctionType.from(APIGatewayProxyRequestEvent.class).to(APIGatewayProxyResponseEvent.class))
     );
   }
-
-
-
 }

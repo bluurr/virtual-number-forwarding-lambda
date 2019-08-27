@@ -16,3 +16,7 @@ export PARAMETER_SUB_DOMAINS="*.bluurr.io,*.api.bluurr.io"
 
 export PARAMETER_API_GATEWAY_DOMAIN="dev-gateway.api.bluurr.io"
 export PARAMETER_ROUTE_53_HOSTED_ZONE="bluurr.io."
+
+## Function driven parameters
+## Change this parameter to configure the response a non-white listed caller will recieve.
+export PARAMETER_DEFAULT_VOICE_ANSWER_TEXT="<speak>Hello, Thank you for calling. I'm currently not available to take this call.</speak>"

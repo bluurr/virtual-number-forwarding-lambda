@@ -6,5 +6,5 @@ spring:
           enabled: false
 default:
   voice:
-    response:
+    answer:
       text: "<speak>Hello, Thank you for calling. I'm currently not available to take this call.</speak>"

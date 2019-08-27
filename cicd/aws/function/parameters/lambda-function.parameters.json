@@ -10,5 +10,9 @@
   {
     "ParameterKey": "Environment",
     "ParameterValue": "${PARAMETER_ENVIRONMENT}"
+  },
+  {
+    "ParameterKey": "DefaultVoiceAnswerText",
+    "ParameterValue": "${PARAMETER_DEFAULT_VOICE_ANSWER_TEXT}"
   }
 ]

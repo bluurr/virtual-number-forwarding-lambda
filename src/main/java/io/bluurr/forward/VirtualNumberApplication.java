@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.function.Function;
 
 @SpringBootApplication
-public class VirtualNumberApplication extends VirtualNumberFunctionalApplication {
+public class VirtualNumberApplication {
 
   public static void main(final String[] args) {
     SpringApplication.run(VirtualNumberApplication.class, args);
