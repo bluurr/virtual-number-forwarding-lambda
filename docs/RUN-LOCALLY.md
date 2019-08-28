@@ -8,6 +8,7 @@ Using [SAM](https://docs.aws.amazon.com/serverless-application-model/latest/deve
 
 ### Prerequisite
 
+- [AWS CLI](https://aws.amazon.com/cli) (For deployment to AWS)
 - [SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 - [Docker](https://www.docker.com)
 

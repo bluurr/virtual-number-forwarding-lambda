@@ -5,8 +5,14 @@ A AWS lambda function for generating a call-plan for an incoming call from a vir
 ## Getting Started
 
 This lambda allows a incoming phone call from a [Nexmo](https://nexmo.com) virtual phone number to be manipulated with the following behaviour(s):
+
 - Voice instructions 
 - Number Whitelisting
+
+### Example Use Case
+
+- Virtual Number for CV to reduce volume of recruiters calls.
+- Burner number for short lived ads.
 
 ### Prerequisite
 
@@ -27,6 +33,12 @@ The library requires the following minimum versions
 - [AWS Account](https://aws.amazon.com/) (For deployment)
 - [Nexmo Account](https://www.nexmo.com/) (For Virtual Number)
 
+##### Nexmo
+
+The Nexmo account will require an [application](https://dashboard.nexmo.com/voice/your-applications) to be set-up and a [number](https://dashboard.nexmo.com/buy-numbers) to be purchased and linked with the application.
+
+The application needs the web-hooks for `Event URL` and `Answer URL` to be use HTTP `POST` and should point at the API Gateway (Custom domain or AWS provided URL). For example a custom URL may look like `https://dev.api.bluurr.io/call-event`
+ 
 ### Building
 
 To build the lambda application run the following maven command.
