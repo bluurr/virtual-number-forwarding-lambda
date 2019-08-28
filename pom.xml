@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -12,6 +13,16 @@
     <artifactId>virtual-number-forwarding-lambda</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>virtual-number-forwarding-lambda</name>
+
+    <developers>
+        <developer>
+            <name>Bluurr</name>
+            <email>dev@bluurr.com</email>
+            <organization>Bluurr</organization>
+            <organizationUrl>https://www.bluurr.com</organizationUrl>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>2.1.1.RELEASE</spring-cloud.version>
@@ -162,4 +173,11 @@
             </plugin>
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 </project>

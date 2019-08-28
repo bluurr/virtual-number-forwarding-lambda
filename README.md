@@ -49,7 +49,7 @@ Full documentation can be found [here](./docs/RUN-LOCALLY.md)
 
 The application can be booted like a normal Spring Boot application ([Spring Docs](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html)).
 
-This will start a web endpoint exposing the function at `http://localhost:8080/function` an example `POST` payload can be found [here](./src/test/resources/local.stack/basic-api-gateway-request-event.json).
+This will start a web endpoint exposing the function at `http://localhost:8080/function` an example `POST` payload can be found [here](./src/test/resources/local/stack/basic-api-gateway-request-event.json).
 
 More information can be found [here](https://cloud.spring.io/spring-cloud-function/multi/multi__functional_bean_definitions.html)
 
