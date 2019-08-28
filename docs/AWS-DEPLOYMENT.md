@@ -8,7 +8,7 @@ The project contains a number of scripts (found [here](./../cicd/aws)) to deploy
 
 - [AWS CLI](https://aws.amazon.com/cli) (For deployment to AWS)
     - CLI needs to be configured with account details [documentation here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
-- [BASH](https://en.wikipedia.org/wiki/Bash_(Unix_shell\))
+- [BASH](https://en.wikipedia.org/wiki/Bash_(Unix_shell))
     -  [cygwin](https://www.cygwin.com) (For deployment to AWS on Windows)
     
 ## Optional
@@ -28,6 +28,44 @@ The scripts are broken down into the following folders.
 ### Common
 
 The common scripts are common utility scripts which are used by the other script.
+
+> It's recommended to check out the [runner](#Runner), [function](#Function) or [domain](#Domain) scripts for example usage of the common scripts.
+
+#### [aws-cf-upsert.sh](./../cicd/aws/common/aws-cf-upsert.sh)
+
+The `aws-cf-upsert.sh` will perform an upsert (create/update-on-exist) operation for deployment of the requested CloudFormation template. The script will wait until the operation is completed/time-out/errors
+
+#### [find-maven-build-artifact-name.sh](./../cicd/aws/common/find-maven-build-artifact-name.sh)
+
+The `find-maven-build-artifact-name.sh` will attempt to find the the maven build artifact name for the fat-lambda code jar.
+
+> Requires that the code has been built e.g `mvn verify`
+
+#### [find-maven-directory.sh](./../cicd/aws/common/find-maven-directory.sh)
+
+The `find-maven-directory.sh` will attempt to find the the maven project base directory by going up the file tree until it finds the first candidate.
+
+#### [get-pipeline-parameter-names.sh](./../cicd/aws/common/get-pipeline-parameter-names.sh)
+
+The `get-pipeline-parameter-names.sh` will return the name of all parameters (format `PARAMETER_`) that are currently available to the executing script.
+
+#### [get-pipeline-parameter-values.sh](./../cicd/aws/common/get-pipeline-parameter-values.sh)
+
+The `get-pipeline-parameter-values.sh` will return the name and value (Formatted as `parameterName=parameterValue`) of all parameters (format `PARAMETER_`) that are currently available to the executing script.
+
+#### [process-cloud-template-parameters.sh](./../cicd/aws/common/process-cloud-template-parameters.sh)
+
+The `process-cloud-template-parameters.sh` will return the processed version of a CloudFormation parameter template.
+
+It's expected that the command will be called with the location of the CloudFormation parameter file and any additional parameters: 
+e.g. `process-cloud-template-parameters.sh "example-cf-parameters.json ExampleParamater ExampleValue`. The `process-cloud-template-parameters.sh` will automatically have access to all parameters provided by [get-pipeline-parameter-values.sh](#get-pipeline-parameter-values.sh)
+
+#### [process-cloud-template-parameters-and-save.sh](./../cicd/aws/common/process-cloud-template-parameters-and-save.sh)
+
+The `process-cloud-template-parameters-and-save.sh` will process the parameters on CloudFormation parameter file and then save the output to a new file with the following name `${originalFileName}.cf-processed.${originalFileExt}`.
+
+It's expected that the command will be called with the location of the CloudFormation parameter file and any additional parameter: 
+e.g. `process-cloud-template-parameters-and-save.sh "example-cf-parameters.json ExampleParamater ExampleValue`. The `process-cloud-template-parameters-and-save.sh` will automatically have access to all parameters provided by [get-pipeline-parameter-values.sh](#get-pipeline-parameter-values.sh)
 
 ### Domain
 
