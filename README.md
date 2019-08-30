@@ -2,6 +2,8 @@
 
 A AWS lambda function for generating a call-plan for an incoming call from a virtual number. 
 
+[![Build Status](https://dev.azure.com/open-source-bluurr-io/virtual-number-umbrella-project/_apis/build/status/bluurr.virtual-number-forwarding-lambda?branchName=master)](https://dev.azure.com/open-source-bluurr-io/virtual-number-umbrella-project/_build/latest?definitionId=1&branchName=master)
+
 ## Getting Started
 
 This lambda allows a incoming phone call from a [Nexmo](https://nexmo.com) virtual phone number to be manipulated with the following behaviour(s):
