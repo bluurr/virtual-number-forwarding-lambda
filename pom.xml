@@ -11,7 +11,7 @@
 
     <groupId>io.bluurr</groupId>
     <artifactId>virtual-number-forwarding-lambda</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>virtual-number-forwarding-lambda</name>
 
     <developers>
@@ -22,6 +22,17 @@
             <organizationUrl>https://www.bluurr.com</organizationUrl>
         </developer>
     </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/bluurr/virtual-number-forwarding-lambda.git</connection>
+        <developerConnection>scm:git:ssh://github.com/bluurr/virtual-number-forwarding-lambda.git</developerConnection>
+        <url>https://github.com/bluurr/virtual-number-forwarding-lambda.git/tree/master</url>
+    </scm>
+
+    <ciManagement>
+        <system>Azure DevOps</system>
+        <url>https://dev.azure.com/open-source-bluurr-io/virtual-number-umbrella-project/_build?definitionId=1</url>
+    </ciManagement>
 
     <properties>
         <java.version>1.8</java.version>
