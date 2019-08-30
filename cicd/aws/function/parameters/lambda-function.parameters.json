@@ -12,6 +12,10 @@
     "ParameterValue": "${PARAMETER_ENVIRONMENT}"
   },
   {
+    "ParameterKey": "AccessIp",
+    "ParameterValue": "${PARAMETER_ACCESS_IP}"
+  },
+  {
     "ParameterKey": "DefaultVoiceAnswerText",
     "ParameterValue": "${PARAMETER_DEFAULT_VOICE_ANSWER_TEXT}"
   }

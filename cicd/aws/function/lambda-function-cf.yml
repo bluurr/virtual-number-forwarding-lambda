@@ -17,6 +17,11 @@ Parameters:
   DefaultVoiceAnswerText:
     Type: 'String'
     Description: 'The default voice text response which should be spoken when a call is received.'
+  AccessIp:
+    Type: 'String'
+
+Conditions:
+  noAccessIp: !Equals [ !Ref AccessIp, '' ]  ## Check if the IP is blank
 Resources:
   LambdaApiGateway:
     Type: AWS::Serverless::Api
@@ -24,6 +29,35 @@ Resources:
       Name: !Sub "${Environment}-${NamePrefix}-lambda-api-gateway"
       StageName: !Ref 'GatewayStage'
       EndpointConfiguration: REGIONAL
+      Auth:
+        ResourcePolicy:
+          CustomStatements:
+            -
+              Effect: 'Allow'
+              Principal: '*'
+              Action: 'execute-api:Invoke'
+              Resource:
+                - 'execute-api:/*/*/*'
+              Condition:
+                IpAddress:
+                  aws:SourceIp:
+                    - '119.81.44.0/28'  ## Nexmo access IPs
+                    - '169.60.146.16/28'  ## Nexmo access IPs
+                    - '169.63.86.160/28'  ## Nexmo access IPs
+                    - '5.10.112.112/28'  ## Nexmo access IPs
+                    - '169.50.200.64/28' ## Nexmo access IPs
+            - !If
+              - noAccessIp
+              - !Ref AWS::NoValue
+              - Effect: 'Allow'
+                Principal: '*'
+                Action: 'execute-api:Invoke'
+                Resource:
+                  - 'execute-api:/*/*/*'
+                Condition:
+                  IpAddress:
+                    aws:SourceIp:
+                      - !Ref 'AccessIp'
   LambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
