@@ -35,6 +35,16 @@ The common scripts are common utility scripts which are used by the other script
 
 The `aws-cf-upsert.sh` will perform an upsert (create/update-on-exist) operation for deployment of the requested CloudFormation template. The script will wait until the operation is completed/time-out/errors
 
+#### [find-build-artifact.sh](./../cicd/aws/common/find-build-artifact.sh)
+
+> *Note* this script is has the same outcome as [find-maven-build-artifact-name.sh](#[find-maven-build-artifact-name.sh]) but has the following advantages
+> - Runs quicker.
+> - Maven is not required to look-up the artifact name. 
+
+The `find-build-artifact.sh` will attempt to find the the maven build artifact name for the fat-lambda code jar.
+
+> Requires that the code has been built e.g `mvn verify`
+
 #### [find-maven-build-artifact-name.sh](./../cicd/aws/common/find-maven-build-artifact-name.sh)
 
 The `find-maven-build-artifact-name.sh` will attempt to find the the maven build artifact name for the fat-lambda code jar.
@@ -161,3 +171,74 @@ The following steps are performed within this script
 - Deploys the CloudFormation Template
     - Set-up the API gateway with a custom name
     - Adds the Domain to Route53
+    
+## Parameters
+
+The above scrips are powered by a number of configurable parameters. These parameters can be found in the [all-parameters.sh](#[all-parameters.sh])  and are used for configuring the runner scripts.
+
+> Parameters are always prefixed with a `PARAMETER_`
+
+> **The `all-parameters.sh` contains example default which should be updated depending on the use case**
+
+### PARAMETER_ENVIRONMENT
+
+The `PARAMETER_ENVIRONMENT` is used for defining which environment is used for deployment, e.g (test, prod). 
+
+The following behaviours are controlled:
+
+- CloudFormation names are prefixed.
+- CloudFormation output are prefixed.
+- S3 code bucket with be prefixed.
+- API gateway stage will be named after the environment.
+
+### PARAMETER_JAR_NAME
+
+The `PARAMETER_JAR_NAME` is used for defining the name of the lambda code jar which should be deployed.
+
+The following script can be used to locate the lambda code jar name [find-build-artifact.sh](#[find-build-artifact.sh]).
+
+### PARAMETER_ROOT_DOMAIN
+
+The `PARAMETER_ROOT_DOMAIN` should be the root level domain of the custom domain name, for example if the custom domain is `dev-apigateway.example.com` then the root would be `example.com`
+
+The following behaviours are controlled:
+
+- ROOT domain for certificate generation (Required for HTTPS support)
+
+> More information on certificate management and creation can be found [here](https://aws.amazon.com/certificate-manager/)
+
+### PARAMETER_SUB_DOMAINS
+
+The `PARAMETER_SUB_DOMAINS` is used to add additional sub-domains in addition to the `PARAMETER_ROOT_DOMAIN`. These sub domains can use wildcard patterns for example `*.example.com` would support `dev-apigateway.example.com` due to the wildcard matcher.  
+
+> It's optional to include sub domain for the certificate generation.
+
+More information found [here](https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html).
+
+### PARAMETER_API_GATEWAY_DOMAIN
+
+The `PARAMETER_API_GATEWAY_DOMAIN` is the domain/sub-domain for accessing the API-Gateway with a custom domain (more information [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)).
+
+For example if you have a route53 domain name of `example.com` the api gateway domain might be configured as `dev-apigateway.example.com`
+
+### PARAMETER_ROUTE_53_HOSTED_ZONE
+
+The `PARAMETER_ROUTE_53_HOSTED_ZONE` should refer to the name of the [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html) within route53 which matches the target `PARAMETER_API_GATEWAY_DOMAIN` when using an API gateway [custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html).
+
+> This step assumes that a custom domain name is already hosted on route 53. If a custom domain needs to be set-up follow these steps [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar.html) 
+
+### PARAMETER_ACCESS_IP
+
+The `PARAMETER_ACCESS_IP` is used to enable an additional ip in the whitelist when accessing the lambda function via the API-Gateway. 
+
+More information on AWS resource policy can be found [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-resource-policies-create-attach.html#apigateway-resource-policies-create-attach-console) and policy examples found [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-resource-policies-examples.html)
+
+> It's recommended to add your IP for development builds to validate connectivity.
+> To find the correct IP to add use [whatismyipaddress](https://whatismyipaddress.com/).
+
+
+### PARAMETER_DEFAULT_VOICE_ANSWER_TEXT
+
+The `PARAMETER_DEFAULT_VOICE_ANSWER_TEXT` is used to define the default generated voice message which should be read back to if no other action overrides this behaviour.
+
+More documentation on support voice formats can be found [here](https://developer.nexmo.com/voice/voice-api/guides/customizing-tts).

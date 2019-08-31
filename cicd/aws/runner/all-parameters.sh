@@ -3,7 +3,7 @@ echo "Locating Maven build artifact"
 
 ## Find the maven artifact containing the lambda code base
 mavenDir=$(find-maven-directory.sh)
-buildArtifact=$(find-maven-build-artifact-name.sh "${mavenDir}")
+buildArtifact=$(find-build-artifact.sh "${mavenDir}")
 
 echo "Exporting parameters"
 
