@@ -43,8 +43,6 @@ public class VirtualNumberFunction {
     if (isAnsweredEvent(event)) {
       return callPlanProvider.onAnswered(event.getFrom());
     }
-
-    log.warn("Call event information: {}", event);
     return null;
   }
 
