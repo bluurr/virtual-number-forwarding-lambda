@@ -29,6 +29,13 @@ Resources:
       Name: !Sub "${Environment}-${NamePrefix}-lambda-api-gateway"
       StageName: !Ref 'GatewayStage'
       EndpointConfiguration: REGIONAL
+      ## AWS::ApiGateway::Stage
+      MethodSettings:
+        -
+          ResourcePath: "/*"
+          HttpMethod: "*"
+          ThrottlingRateLimit: 50
+          ThrottlingBurstLimit: 25
       Auth:
         ResourcePolicy:
           CustomStatements:
